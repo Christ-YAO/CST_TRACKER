@@ -51,13 +51,19 @@ function UetrPage({data}) {
                 autoComplete="off"
             >
                 <TextField id="filled-basic" label="UETR" variant="filled" error={error} value={inputValue} onChange={(e) => setInputValue(e.target.value)} required sx={{maxWidth: 600}}/>
-                <Button sx={{maxWidth: 150}} variant="contained" onClick={handleSubmit}>Rechercher</Button>
+                <Button type="submit" sx={{maxWidth: 150}} variant="contained" onClick={handleSubmit}>Rechercher</Button>
             </Box>
     </Container>
-            <hr />
-        <UetrInfo inputValue={inputValue} value={value}/>
-        <hr />
-        <Progressbar data={data} inputValue={inputValue} value={value}/>
+                {data.map((items) => {
+                    return(<>
+                        <hr />
+                        <UetrInfo items={items} value={value}/>
+                        <hr />
+                        <Progressbar data={data} items={items} value={value}/>
+                    </>)
+                    
+                })}
+            
         
     </>
     )

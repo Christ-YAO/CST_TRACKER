@@ -1,0 +1,114 @@
+{
+  "posts": [
+    {
+
+        "uetr": "4a79684e-668d-48d0-97f5-ff3e6fe809e2",
+    
+        "status": "Completed",
+    
+        "instructed_amount": 55114.28,
+    
+        "credited_amount": 55114.28,
+    
+        "instructed_currency": "MRU",
+    
+        "charge_amount": "",
+    
+        "elapsed_time": "00d, 22h52min",
+    
+        "last_update_time": null,
+    
+        "sender_data": [{
+    
+            "status": "In Progress",
+    
+            "bank_name": "ATTIJARIWAFA BANK",
+    
+            "bic": "BCMAMAM0XXX",
+    
+            "address": "(BIC RCT) BOULEVARD MOLAYE YOUSSEF",
+    
+            "city": "Casablanca",
+    
+            "country": "Casablanca",
+    
+            "deduct": "DEBT",
+    
+            "sender_reference": "TRF20221024",
+    
+            "charge_amount": null,
+    
+            "elapsed_time": "00d, 22h52min",
+    
+            "timezone": 1,
+    
+            "send_date": "2022-10-24T10:54:32.000+00:00"
+    
+        },{
+    
+            "status": "In Progress",
+    
+            "bank_name": " ATTIJARI BANK MAURITANIE",
+    
+            "bic": "BCMAMRM0XXX",
+    
+            "address": "(BIC RCT) MAMADOU KONATE, 91-92, NOUAKCHOTT",
+    
+            "city": "NOUAKCHOTT",
+    
+            "country": "Mauritania",
+    
+            "deduct": "DEBT",
+    
+            "sender_reference": "TRF20221024",
+    
+            "charge_amount": null,
+    
+            "elapsed_time": "00d, 22h52min",
+    
+            "timezone": 0,
+    
+            "credit_date": "2022-10-24T10:54:44.000+00:00"
+    
+        },
+            {
+    
+                "status": "In Progress",
+    
+                "bank_name": "SCB CAMEROUN S.A",
+    
+                "bic": "BCMACMC0XXX",
+    
+                "address": "(BIC RCT) RUE DU ROI GEORGES, 530",
+    
+                "city": " DOUALA",
+    
+                "country": " Cameroon",
+    
+                "deduct": "DEBT",
+    
+                "sender_reference": "TRF20221024",
+    
+                "charge_amount": null,
+    
+                "elapsed_time": null,
+    
+                "timezone": 0,
+    
+                "received_date": null,
+    
+                "send_date": null
+    
+            }
+    
+        ],
+    
+        "requestDate": "2022-10-31T15:37:12.192+00:00"
+    
+    }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}

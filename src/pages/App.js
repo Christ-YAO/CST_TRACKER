@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Header from '../components/header'
@@ -19,58 +20,66 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function Sidebar() {
+  const [data, setData] = useState([])
 
-  const [data] = useState([
-    {
-        title: 'profitable and efficient financial institution',
-        bic: 'pefijpjt',
-        country: 'tokyo',
-        city: 'japan',
-        date1: '14 mar 2023',
-        hour1: '17:25',
-        reference: 5688442224442233,
-        deducts: 20
-    },
-    {
-        title: 'save with us bank',
-        bic: 'swubdeff',
-        country: 'frankfurt',
-        city: 'germany',
-        date1: '14 mar 2023',
-        date2: '14 mar 2023',
-        hour1: '09:35 CET',
-        hour2: '11:45 CET',
-        time: '2hr 10min',
-        reference: 4586322488662566,
-        deducts: 10
-    },
-    {
-        title: 'siply delightful bank',
-        bic: 'sdebfrpp',
-        country: 'paris',
-        city: 'france',
-        date1: '14 mar 2023',
-        date2: '14 mar 2023',
-        hour1: '11:50 CET',
-        hour2: '14:10 CET',
-        time: '2hr 20min',
-        reference: 7846318431435174,
-        deducts: 30
-    },
-    {
-        title: 'broker dealer of absolute perfection',
-        bic: 'bdapus33',
-        country: 'new york',
-        city: 'united states',
-        date1: '14 mar 2023',
-        date2: '14 mar 2023',
-        hour1: '09:20 EST',
-        hour2: '10:30 EST',
-        time: '1hr 10min',
-        reference: 7846318431435174,
-        deducts: 10
-    }
-])
+    useEffect(() => {
+        axios
+          .get("http://localhost:3000/posts")
+          .then((res) => setData(res.data));
+      }, []);
+
+
+//   const [data] = useState([
+//     {
+//         title: 'profitable and efficient financial institution',
+//         bic: 'pefijpjt',
+//         country: 'tokyo',
+//         city: 'japan',
+//         date1: '14 mar 2023',
+//         hour1: '17:25',
+//         reference: 5688442224442233,
+//         deducts: 20
+//     },
+//     {
+//         title: 'save with us bank',
+//         bic: 'swubdeff',
+//         country: 'frankfurt',
+//         city: 'germany',
+//         date1: '14 mar 2023',
+//         date2: '14 mar 2023',
+//         hour1: '09:35 CET',
+//         hour2: '11:45 CET',
+//         time: '2hr 10min',
+//         reference: 4586322488662566,
+//         deducts: 10
+//     },
+//     {
+//         title: 'siply delightful bank',
+//         bic: 'sdebfrpp',
+//         country: 'paris',
+//         city: 'france',
+//         date1: '14 mar 2023',
+//         date2: '14 mar 2023',
+//         hour1: '11:50 CET',
+//         hour2: '14:10 CET',
+//         time: '2hr 20min',
+//         reference: 7846318431435174,
+//         deducts: 30
+//     },
+//     {
+//         title: 'broker dealer of absolute perfection',
+//         bic: 'bdapus33',
+//         country: 'new york',
+//         city: 'united states',
+//         date1: '14 mar 2023',
+//         date2: '14 mar 2023',
+//         hour1: '09:20 EST',
+//         hour2: '10:30 EST',
+//         time: '1hr 10min',
+//         reference: 7846318431435174,
+//         deducts: 10
+//     }
+// ])
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 0}}>
       <Header />

@@ -27,12 +27,12 @@
 
 .line {
   position: absolute;
-  /* background: green; */
+  background: green;
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
   border-radius: 30px;
-  width: 33%;
+  width: 99%;
   height: 10px;
   z-index: 2;
   transition: all 0.4s ease;
@@ -48,7 +48,7 @@
   height: 40px;
   width: 40px;
   background: #eee;
-  border: 5px solid #ddd;
+  border: 10px solid #fff;
   border-radius: 50%;
   display: grid;
   place-content: center;
@@ -61,7 +61,7 @@
   position: relative;
   border: 3px solid #ddd;
   z-index: 1;
-  margin-left: -8px;
+  margin-left: -2px;
  }
 
  .box::after {
@@ -78,4 +78,8 @@
 
 .box:hover::after {
   border-bottom: 10px solid green;
+}
+
+span {
+  font-size: 16px;
 }
