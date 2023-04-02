@@ -4,16 +4,16 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HistoryIcon from '@mui/icons-material/History';
 
-function UetrInfo({items, value}) {
+function UetrInfo({data, value, isLoading}) {
+    // console.log(items)
     if (value === '') {
         return '';
-    } else if (value === items.uetr) {
+    } else if (value === data.uetr) {
     return (
         <Box
                 sx={{
                 maxWidth: '90vw',
                 width: '100%',
-                background: "lightgrey",
                 display: "flex",
                 justifyContent: "center",
                 flexDirection: "column",
@@ -24,8 +24,8 @@ function UetrInfo({items, value}) {
                 noValidate
                 autoComplete="off"
             >
-                <Toolbar style={{display: 'flex', flexWrap: 'wrap', marginLeft: '0%', width: '95%', gap: 20, margin: '10px auto'}}>
-                <Box sx={{flex: "1", minWidth: 350, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1}}>
+                <Toolbar style={{display: 'flex', flexWrap: 'wrap', marginLeft: '0%', width: '100%', gap: 20, margin: '10px auto'}}>
+                <Box sx={{flex: "1", minWidth: 340, height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -34,32 +34,40 @@ function UetrInfo({items, value}) {
                         <span>Final status</span>
                         <span>08 MAR 2023-10:30 PDT</span>
                     </Box>
-                    <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
-                        <TaskAltIcon sx={{fontSize: 50, color: 'green', marginRight: 1}} />
+                    {data.latest_status !== 'Completed' ? <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
+                        <HistoryIcon sx={{fontSize: 50, color: 'grey', marginRight: 1}} />
                         <Box>
-                            <Typography variant='h6' color="green">{items.status}</Typography>
+                            <Typography variant='h6' color="gray">{data.latest_status}</Typography>
                             <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography>
                         </Box>
                     </Box>
+                    :
+                    <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
+                        <TaskAltIcon sx={{fontSize: 50, color: 'green', marginRight: 1}} />
+                        <Box>
+                            <Typography variant='h6' color="green">{data.latest_status}</Typography>
+                            <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography>
+                        </Box>
+                    </Box>}
                     
                 </Box>
-                <Box sx={{flex: "1", minWidth: 280, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '40%'}}>
+                <Box sx={{flex: "1", minWidth: 280, height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '40%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         fontSize: 14,
                     }}>
                         <span>Instructed amount</span>
-                        <span>Credited amount</span>
+                        {/* <span>Credited amount</span> */}
                     </Box>
-                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', marginTop: 0}}>
-                            <Typography variant='h6'>{items.instructed_amount}</Typography>
-                            <ArrowForwardIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
-                            <Typography variant='h6' >{items.credited_amount}</Typography>
+                    <Box style={{display: 'flex', marginTop: 0}}>
+                            <Typography variant='h6'>{data.instructed_amount}</Typography>
+                            {/* <ArrowForwardIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
+                            <Typography variant='h6' >{data.credited_amount}</Typography> */}
                     </Box>
                     
                 </Box>
-                <Box sx={{flex: "1", minWidth: 100, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '-100px'}}>
+                <Box sx={{flex: "1", minWidth: 100, height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -68,11 +76,11 @@ function UetrInfo({items, value}) {
                         <Box>Deducts</Box>
                     </Box>
                     <Box style={{marginTop: 10}}>
-                            <Typography variant='h6'>70 USD</Typography>
-                            <Typography variant='body1'>SHA</Typography>
+                            <Typography variant='h6'>{data.deduct}</Typography>
+                            {/* <Typography variant='body1'>SHA</Typography> */}
                     </Box>
                 </Box>
-                <Box sx={{flex: "1", minWidth: 180, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
+                <Box sx={{flex: "1", minWidth: 200, height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -82,10 +90,10 @@ function UetrInfo({items, value}) {
                     </Box>
                     <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
                             <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}}/>
-                            <Typography variant='h6'>{items.elapsed_time}</Typography>
+                            <Typography variant='h6'>{data.elapsed_time}</Typography>
                     </Box>
                 </Box>
-                <Box sx={{flex: "1", minWidth: 350, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '32%'}}>
+                <Box sx={{flex: "1", minWidth: 330, height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '30%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -93,8 +101,20 @@ function UetrInfo({items, value}) {
                     }}>
                         <span>Traking number</span>
                     </Box>
-                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10}}>
-                            <Typography>{items.uetr}</Typography>
+                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 0}}>
+                            <Typography>{data.uetr}</Typography>
+                    </Box>
+                </Box>
+                <Box sx={{flex: "1", minWidth: '100%', height: 110, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '22%'}}>
+                    <Box style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        fontSize: 14,
+                    }}>
+                        <span>Description</span>
+                    </Box>
+                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0}}>
+                            <Typography>{data.status_description}</Typography>
                     </Box>
                 </Box>
             </Toolbar>
