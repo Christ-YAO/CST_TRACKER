@@ -1,123 +1,3 @@
-// import { Box, Typography } from '@mui/material';
-// import React from 'react';
-// import LocationOnIcon from '@mui/icons-material/LocationOn';
-// import AccessTimeIcon from '@mui/icons-material/AccessTime';
-// import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// import HistoryIcon from '@mui/icons-material/History';
-
-// function UetrData({data, value, inputValue, item, index}) {
-//     return <Box
-//             sx={{
-//             position: 'relative',
-//             maxWidth: '90vw',
-//             width: '100%',
-//             background: "lightgrey",
-//             display: "flex",
-//             justifyContent: 'space-around',
-//             flexWrap: 'wrap',
-//             gap: 2,
-//             paddingBottom: "20px",
-//             padding: '20px',
-//             borderRadius: 1,
-//             margin: '0 auto',
-//             "& > :not(style)": { m: 1, width: "90%" }
-//             }}
-//             noValidate
-//             autoComplete="off"
-//         >
-//             {data.map((item, index) => {
-//                 const {title, bic, country, city, date1, date2, hour1, hour2, time, reference, deducts} = item;
-
-//                 const func = ({date1, date2}) => {
-//                     if (date1 && date2) {
-//                         return (
-//                             <Box sx={{height: '100px !important'}}>
-//                                 <Box style={{ display: 'flex', justifyContent: 'space-between',}}>
-//                                     <Box>
-//                                         <Box>
-//                                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                         </Box>
-//                                         <Box style={{textTransform: 'uppercase',}}>
-//                                             <Typography variant='h6' sx={{fontSize: 15}}>{date1}</Typography>
-//                                             <Typography>{hour1}</Typography>
-//                                         </Box>  
-//                                     </Box>
-//                                     <Box style={{height: '85px', width: 1, background: 'gray'}}></Box>
-//                                     <Box>
-//                                         <Box>
-//                                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                         </Box>
-//                                         <Box sx={{textTransform: 'uppercase',}}>
-//                                             <Typography variant='h6' sx={{fontSize: 15}}>{date2}</Typography>
-//                                             <Typography>{hour2}</Typography>
-//                                         </Box>
-//                                     </Box>
-//                                 </Box>
-//                                 <Box sx={{marginTop: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-//                                 <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
-//                                 <Typography>{time}</Typography>
-//                             </Box>
-//                         </Box>
-//                         )
-//                     }
-//                     if (date1 || date2) {
-//                         return (
-//                             <Box>
-//                                 <Box>
-//                                     <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                     <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-//                                 </Box>
-//                                 <Box style={{textTransform: 'uppercase',}}>
-//                                     <Typography variant='h6' sx={{fontSize: 15}}>{date1} {date2}</Typography>
-//                                     <Typography>{hour1} {hour2}</Typography>
-//                                 </Box>  
-//                             </Box>)
-//                         }
-//                 }
-//                 if(inputValue === '') {
-//                     return ''
-//                 } 
-//                 else if (inputValue === value) {
-//                     return <Box key={index} sx={{
-//                         maxWidth: '350px !important',
-//                         width: '100% !important',
-//                         bgcolor: '#eee',
-//                         borderRadius: 1,
-//                     }}>
-            
-//                         <h4 style={{height: 40,textTransform: 'uppercase', borderBottom: '1px solid #efe', padding: '0px 15px 10px 15px', textAlign: 'center'}}>{title}</h4>
-//                         <Box style={{borderBottom: '1px solid #efe', paddingBottom: 15}}>
-//                             <Typography style={{textTransform: 'uppercase', paddingLeft: 30}}>bic : {bic}</Typography>
-//                             <Box style={{display: 'flex', alignItems: 'center', marginTop: 10, paddingLeft: 20}}>
-//                                 <LocationOnIcon sx={{fontSize: 50, color: 'gray'}} />
-//                                 <Box style={{textTransform: 'uppercase', paddingLeft: 10}}>
-//                                     <Typography variant='h6'>{country}</Typography>
-//                                     <Typography>{city}</Typography>
-//                                 </Box>
-//                             </Box>
-//                         </Box>
-//                         <Box style={{textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', borderBottom: '1px solid #efe', height: '120px'}}>
-//                             {func({date1, date2})}
-//                         </Box>
-//                         <Box style={{padding: 10}}>
-//                             <Typography>Senders's reference : {reference}</Typography>
-//                             <Typography sx={{marginTop: 2}}>Senders's deducts : {deducts} USD</Typography>
-//                         </Box>
-//                     </Box>
-//                     }
-
-                
-
-                
-//             })}
-//         </Box>
-// }
-
-// export default UetrData;
-
-
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -125,90 +5,148 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HistoryIcon from '@mui/icons-material/History';
 
-function ProgressData({item, index, value, inputValue}) {
-    const {title, bic, country, city, date1, date2, hour1, hour2, time, reference, deducts} = item;
+function ProgressData({data, intermediary}) {
+    // console.log(senderData)
+    const {status, bank_name, bic, country, city} = data.event_data;
+    // let bgColor = status === "Completed" ? "#FFA07A" : "#f8f8ff";
+    // let color = status === "Completed" ? "#fff" : "#667";
 
-    const func = ({date1, date2}) => {
-        if (date1 && date2) {
-            return (
-                <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between',}}>
-                        <div>
-                            <div>
-                                <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-                                <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-                            </div>
-                            <div style={{textTransform: 'uppercase',}}>
-                                <Typography variant='h6' sx={{fontSize: 15}}>{date1}</Typography>
-                                <Typography>{hour1}</Typography>
-                            </div>  
-                        </div>
-                        <div style={{height: '85px', width: 1, background: 'gray'}}></div>
-                        <div>
-                            <div>
-                                <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-                                <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-                            </div>
-                            <div style={{textTransform: 'uppercase',}}>
-                                <Typography variant='h6' sx={{fontSize: 15}}>{date2}</Typography>
-                                <Typography>{hour2}</Typography>
-                            </div>
-                        </div>
+    let chargeAmount = data.event_data.charge_amount
+    // console.log(chargeAmount)
+
+    const func = () => {
+        if (data.send_date && data.received_date) {
+            return <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', height:'100%'}}>
+                <div style={{color: "#1976d2"}}>
+                    <div>
+                        <ArrowForwardIcon sx={{fontSize: 30,}} />
+                        <AccessTimeIcon sx={{fontSize: 30,}} />
                     </div>
-                    <div style={{marginTop: 10, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
-                    <Typography>{time}</Typography>
+                    <div >
+                        {data.received_date}
+                    </div>
+                </div>
+                <div style={{color: "#1976d2"}}>
+                    <div>
+                        <AccessTimeIcon sx={{fontSize: 30,}} />
+                        <ArrowForwardIcon sx={{fontSize: 30,}} />
+                    </div>
+                    <div>
+                        {data.send_date}
+                    </div>
+                </div>
+        </div>
+        } else if (data.send_date) {
+            return <div style={{color: "#1976d2", display: 'grid', placeContent: 'center', height: '100%'}}>
+                <div>
+                    <ArrowForwardIcon sx={{fontSize: 30,}} />
+                    <AccessTimeIcon sx={{fontSize: 30,}} />
+                </div>
+                <div>
+                    {data.send_date}
+                </div>
+        </div>
+        } 
+        if (data.credit_date) {
+            return <div style={{color: "#1976d2", display: 'grid', placeContent: 'center', height: '100%'}}>
+                <div>
+                    <AccessTimeIcon sx={{fontSize: 30,}} />
+                    <ArrowForwardIcon sx={{fontSize: 30,}} />
+                </div>
+                <div>
+                    {data.credit_date}
                 </div>
             </div>
-            )
-        }
-        if (date1 || date2) {
-            return (
-                <div>
-                    <div>
-                        <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-                        <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-                    </div>
-                    <div style={{textTransform: 'uppercase',}}>
-                        <Typography variant='h6' sx={{fontSize: 15}}>{date1} {date2}</Typography>
-                        <Typography>{hour1} {hour2}</Typography>
-                    </div>  
-                </div>)
-            }
+        } 
     }
+    
+
+    // const func = ({date1, date2}) => {
+    //     if (date1 && date2) {
+    //         return (
+    //             <div>
+    //                 <div style={{ display: 'flex', justifyContent: 'space-between',}}>
+    //                     <div>
+    //                         <div>
+    //                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                         </div>
+    //                         <div style={{textTransform: 'uppercase',}}>
+    //                             <Typography variant='h6' sx={{fontSize: 15}}>{date1}</Typography>
+    //                             <Typography>{hour1}</Typography>
+    //                         </div>  
+    //                     </div>
+    //                     <div style={{height: '85px', width: 1, background: 'gray'}}></div>
+    //                     <div>
+    //                         <div>
+    //                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                         </div>
+    //                         <div style={{textTransform: 'uppercase',}}>
+    //                             <Typography variant='h6' sx={{fontSize: 15}}>{date2}</Typography>
+    //                             <Typography>{hour2}</Typography>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div style={{marginTop: 10, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    //                 <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
+    //                 <Typography>{elapsed_time}</Typography>
+    //             </div>
+    //         </div>
+    //         )
+    //     }
+    //     if (date1 || date2) {
+    //         return (
+    //             <div>
+    //                 <div>
+    //                     <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                     <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
+    //                 </div>
+    //                 <div style={{textTransform: 'uppercase',}}>
+    //                     <Typography variant='h6' sx={{fontSize: 15}}>{date1} {date2}</Typography>
+    //                     <Typography>{hour1} {hour2}</Typography>
+    //                 </div>  
+    //             </div>)
+    //         }
+    // }
         return (
-            <>
-                    <Box key={index} className='box' sx={{
-                        height: 480, 
+            <Box>
+                <Box className='box' bgcolor='#f8f8ff' color="#555" sx={{
+                        height: 500, 
                         width: 320,
-                        bgcolor: '#eee',
                         position: 'absolute',
                         marginTop : 2,
                         transform: 'translateX(-38.5%)',
                         borderRadius: 2,
-                    }}>
-            
-                        <h4 style={{height: 40,textTransform: 'uppercase', borderBottom: '1px solid #efe', padding: ' 0 15px 10px 15px', textAlign: 'center'}}>{title}</h4>
-                        <div style={{borderBottom: '1px solid #efe', paddingBottom: 15}}>
+                    }}
+                    >
+                        <div style={{borderBottom: '1px solid', paddingBottom: 15}}>
+                            <h5 style={{display: 'grid', placeContent: 'center',fontSize: '14px', fontWeight: 'bold', height: 60,marginTop: 0, borderRadius: 3, borderBottom: '1px solid', padding: ' 15px 15px 10px 15px', textAlign: 'center', background: '#FFA07A', color: "#fff"}}>{bank_name}</h5>
                             <Typography style={{textTransform: 'uppercase', paddingLeft: 30}}>bic : {bic}</Typography>
-                            <div style={{display: 'flex', alignItems: 'center', marginTop: 10, paddingLeft: 20}}>
-                                <LocationOnIcon sx={{fontSize: 50, color: 'gray'}} />
+                            <div style={{height: 70,display: 'flex', alignItems: 'center', marginTop: 10, paddingLeft: 20}}>
+                                <LocationOnIcon sx={{fontSize: 50,}} />
                                 <div style={{textTransform: 'uppercase', paddingLeft: 10}}>
                                     <Typography variant='h6'>{country}</Typography>
                                     <Typography>{city}</Typography>
                                 </div>
                             </div>
                         </div>
-                        <div style={{textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', borderBottom: '1px solid #efe', height: '110px'}}>
-                            {func({date1, date2})}
+                        <div style={{textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', borderBottom: '1px solid', height: '150px'}}>
+                            {func()}
                         </div>
-                        <div style={{padding: 20}}>
-                            <Typography>Senders's reference : {reference}</Typography>
-                            <Typography>Senders's deducts : {deducts} USD</Typography>
+                        <div style={{paddingLeft: '25px', padding: '10px', display: 'flex', flexDirection: 'column',  height: '90px'}}>
+                                <Typography>Charge Amounts :</Typography>
+                        {chargeAmount.map((item) => {
+                            return <div>
+                                <Typography sx={{fontWeight: 'bold'}}>{item.amount} {item.currency}</Typography></div>
+                        })}
                         </div>
-
-                        {/* {console.log(id)} */}
-                    </Box></>
+                        <div style={{padding: '10px 20px', borderTop: '1px solid',}}>
+                            {data.sender_reference ? 'Sender Reference' : null}
+                            <Typography fontWeight='bold'> {data.sender_reference}</Typography>
+                        </div>
+                    </Box> 
+            </Box>
         )
 }
 export default ProgressData;

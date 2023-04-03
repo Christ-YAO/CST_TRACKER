@@ -4,16 +4,17 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HistoryIcon from '@mui/icons-material/History';
 
-function UetrInfo({inputValue, value}) {
-    if (inputValue === '') {
+function UetrInfo({data, value, isLoading}) {
+    
+    // console.log(items)
+    if (value === '') {
         return '';
-    } else if (inputValue === value) {
+    } else if (value === data.uetr) {
     return (
         <Box
                 sx={{
                 maxWidth: '90vw',
                 width: '100%',
-                background: "lightgrey",
                 display: "flex",
                 justifyContent: "center",
                 flexDirection: "column",
@@ -24,8 +25,8 @@ function UetrInfo({inputValue, value}) {
                 noValidate
                 autoComplete="off"
             >
-                <Toolbar style={{display: 'flex', flexWrap: 'wrap', marginLeft: '0%', width: '95%', gap: 20, margin: '10px auto'}}>
-                <Box sx={{flex: "1", minWidth: 300, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1}}>
+                <Toolbar style={{display: 'flex', flexWrap: 'wrap', marginLeft: '0%', width: '100%', gap: 20, margin: '10px auto'}}>
+                {data.latest_status === "Completed" ? <Box sx={{flex: "1", minWidth: 340, height: 110, bgcolor: '#388e3c', color: '#fff', p: 1.5, borderRadius: 1}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -34,16 +35,25 @@ function UetrInfo({inputValue, value}) {
                         <span>Final status</span>
                         <span>08 MAR 2023-10:30 PDT</span>
                     </Box>
-                    <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
-                        <TaskAltIcon sx={{fontSize: 50, color: 'green', marginRight: 1}} />
+                    {data.latest_status !== 'Completed' ? <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
+                        <HistoryIcon sx={{fontSize: 50, color: '#fff', marginRight: 1}} />
                         <Box>
-                            <Typography variant='h6' color="green">Completed</Typography>
-                            <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography>
+                            <Typography variant='h6' color="#fff">{data.latest_status}</Typography>
+                            {/* <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography> */}
                         </Box>
                     </Box>
+                    :
+                    <Box style={{display: 'flex', alignItems: 'center', marginTop: 10,}}>
+                        <TaskAltIcon sx={{fontSize: 50, color: '#fff', marginRight: 1}} />
+                        <Box>
+                            <Typography variant='h6' color="#fff">{data.latest_status}</Typography>
+                            {/* <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography> */}
+                        </Box>
+                    </Box>}
                     
-                </Box>
-                <Box sx={{flex: "1", minWidth: 320, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '10%'}}>
+                </Box> 
+                : 
+                <Box sx={{flex: "1", minWidth: 340, height: 110, bgcolor: '#FFA07A', color: '#fff', p: 1.5, borderRadius: 1}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -52,27 +62,53 @@ function UetrInfo({inputValue, value}) {
                         <span>Final status</span>
                         <span>08 MAR 2023-10:30 PDT</span>
                     </Box>
-                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 0}}>
-                            <Typography variant='h6'>485,000.00 USD</Typography>
-                            <ArrowForwardIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
-                            <Typography variant='h6' >484,930.00 USD</Typography>
+                    {data.latest_status !== 'Completed' ? <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
+                        <HistoryIcon sx={{fontSize: 50, color: '#fff', marginRight: 1}} />
+                        <Box>
+                            <Typography variant='h6' color="#fff">{data.latest_status}</Typography>
+                            {/* <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography> */}
+                        </Box>
                     </Box>
+                    :
+                    <Box style={{display: 'flex', alignItems: 'center', marginTop: 10,}}>
+                        <TaskAltIcon sx={{fontSize: 50, color: '#fff', marginRight: 1}} />
+                        <Box>
+                            <Typography variant='h6' color="#fff">{data.latest_status}</Typography>
+                            {/* <Typography sx={{fontSize: 14,}}>Credited to beneficiary customers</Typography> */}
+                        </Box>
+                    </Box>}
                     
-                </Box>
-                <Box sx={{flex: "1", minWidth: 100, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '-100px'}}>
+                </Box>}
+                <Box sx={{flex: "1", minWidth: 280, height: 110, bgcolor: '#FFA07A', color: '#fff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '40%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         fontSize: 14,
                     }}>
-                        <Box>Final status</Box>
+                        <span>Instructed amount</span>
+                        {/* <span>Credited amount</span> */}
                     </Box>
-                    <Box style={{marginTop: 10}}>
-                            <Typography variant='h6'>70 USD</Typography>
-                            <Typography variant='body1'>SHA</Typography>
+                    <Box style={{display: 'flex', marginTop: 0}}>
+                            <Typography variant='h6'>{data.instructed_amount}</Typography>
+                            {/* <ArrowForwardIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
+                            <Typography variant='h6' >{data.credited_amount}</Typography> */}
+                    </Box>
+                    
+                </Box>
+                <Box sx={{flex: "1", minWidth: 100, height: 110, bgcolor: '#FFA07A', color: '#fff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
+                    <Box style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        fontSize: 14,
+                    }}>
+                        <Box>Deducts</Box>
+                    </Box>
+                    <Box style={{marginTop: 14}}>
+                            <Typography variant='h6'>{data.deduct}</Typography>
+                            {/* <Typography variant='body1'>SHA</Typography> */}
                     </Box>
                 </Box>
-                <Box sx={{flex: "1", minWidth: 160, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
+                <Box sx={{flex: "1", minWidth: 200, height: 110, bgcolor: '#FFA07A', color: '#fff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '25%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -81,20 +117,25 @@ function UetrInfo({inputValue, value}) {
                         <span>Total duration</span>
                     </Box>
                     <Box style={{display: 'flex', alignItems: 'center', marginTop: 10}}>
-                            <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}}/>
-                            <Typography variant='h6'>6hr 10min</Typography>
+                            <HistoryIcon sx={{fontSize: 30, color: '#fff', marginRight: 1}}/>
+                            <Typography variant='h6'>{data.elapsed_time}</Typography>
                     </Box>
                 </Box>
-                <Box sx={{flex: "1", minWidth: 350, height: 75, bgcolor: '#eee', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '32%'}}>
+                <Box sx={{flex: "1", minWidth: 350, height: 110, bgcolor: '#FFA07A', color: '#fff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '30%'}}>
                     <Box style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         fontSize: 14,
                     }}>
-                        <span>Traking number</span>
+                        <span>Tracking number</span>
                     </Box>
                     <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10}}>
-                            <Typography>3546553e-0967-4c5b-b380-036dcb1cbf46</Typography>
+                            <Typography>{data.uetr}</Typography>
+                    </Box>
+                </Box>
+                <Box sx={{flex: "1", minWidth: '100%', height: 50, bgcolor: '#f8f8ff', p: 1.5, borderRadius: 1, display: 'flex', flexDirection: 'column', gap: '22%'}}>
+                    <Box style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0}}>
+                            <marquee>{data.status_description}</marquee>
                     </Box>
                 </Box>
             </Toolbar>

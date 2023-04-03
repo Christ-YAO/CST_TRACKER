@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Box from '@mui/material/Box';
 import './App.css';
 import reportWebVitals from './reportWebVitals';
 import App from './pages/App'
+import Footer from '../src/components/footer'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div className='container'>
+    <Box>
         <App />
-    </div>
+        <Footer />
+    </Box>
   </React.StrictMode>
 );
 

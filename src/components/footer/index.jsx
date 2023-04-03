@@ -6,9 +6,9 @@ import { Toolbar } from '@mui/material';
 
 export default function SimpleContainer() {
   return (
-    <React.Fragment><hr />
+    <React.Fragment>
       <Toolbar>
-      <Box component="main" sx={{ textAlign: "center",flexGrow: 1, p: 2, bgcolor: '#eee', mb : 1.5 }}>
+      <Box component="main" sx={{ textAlign: "center",flexGrow: 1, p: 2, bgcolor: '#f8f8ff',  }}><hr />
           <Typography
             variant='h6'
             color= 'primary'
