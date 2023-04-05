@@ -19,14 +19,10 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PersonIcon from '@mui/icons-material/Person';
 import Header from '../header'
-// import Footer from '../footer'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-// import IbanPage from '../../pages/IbanPage'
 import UetrPage from '../../pages/UetrPage'
-// import RegisterIBAN from '../../pages/RegisterIBAN'
 import Error from '../Error'
 import Link from '@mui/material/Link';
-// import BicSearch from '../../pages/BicSearch';
 import Dashboard from '../../pages/Dashboard';
 import VirEntrant from '../../pages/VirEntrant';
 import VirSortant from '../../pages/VirSortant';
@@ -35,12 +31,11 @@ import RegisterGroup from '../../pages/RegisterGroup';
 import Demandes from '../../pages/Demandes';
 import Select from '../../pages/Select';
 import Loader from '../Loader';
-
 import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import ListItemIcon from '@mui/material/ListItemIcon';
-// import { Dashboard } from '@mui/icons-material';
+
+import Logo from "../commons/Logo";
 
 
 const drawerWidth = 240;
@@ -114,14 +109,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Sidebar({data, isLoading}) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [sideOpen, setSideOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setSideOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setSideOpen(false);
   };
 
   const [toggle, setToggle] = React.useState(false);
@@ -134,7 +129,7 @@ export default function Sidebar({data, isLoading}) {
   return <Box sx={{width: '100%'}}>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={sideOpen}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -143,7 +138,7 @@ export default function Sidebar({data, isLoading}) {
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: 'none' }),
+              ...(sideOpen && { display: 'none' }),
             }}
           >
             <MenuIcon />
@@ -154,11 +149,13 @@ export default function Sidebar({data, isLoading}) {
 
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={sideOpen}>
         <DrawerHeader>
+          <Logo />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
+
         </DrawerHeader>
         <Divider />
         <List>
@@ -167,39 +164,39 @@ export default function Sidebar({data, isLoading}) {
                   <ListItemButton
                     sx={{
                       minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
+                      justifyContent: sideOpen ? 'initial' : 'center',
                       px: 2.5,
                     }}
                   >
                     <AnalyticsIcon
                       sx={{
                         minWidth: 0,
-                        mr: open ? 1 : 'auto',
+                        mr: sideOpen ? 1 : 'auto',
                         justifyContent: 'center',
                       }}
                     />
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }} >Dashboard</ListItemText>
+                    <ListItemText sx={{ opacity: sideOpen ? 1 : 0 }} >Dashboard</ListItemText>
                     
                   </ListItemButton>
             </Link>
             <ListItemButton onClick={handleClick}
                     sx={{
                       minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
+                      justifyContent: sideOpen ? 'initial' : 'center',
                       px: 2.5,
                     }}
                   >
                     <AddCardIcon
                       sx={{
                         minWidth: 0,
-                        mr: open ? 1 : 'auto',
+                        mr: sideOpen ? 1 : 'auto',
                         justifyContent: 'center',
                       }}
                     />
-                      <ListItemText sx={{ opacity: open ? 1 : 0 }} >Virements</ListItemText>
-                      {open ? <ExpandLess /> : null}
+                      <ListItemText sx={{ opacity: sideOpen ? 1 : 0 }} >Virements</ListItemText>
+                      {sideOpen ? <ExpandLess /> : null}
                 </ListItemButton>
-                    <Collapse in={toggle && open} timeout="auto" unmountOnExit>
+                    <Collapse in={toggle && sideOpen} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding >
                         <Link href="/virementsentrant" sx={{color: '#444', textDecoration: 'none'}}>
                           <ListItemButton sx={{ pl: 4 }}>
@@ -211,7 +208,7 @@ export default function Sidebar({data, isLoading}) {
                         </Link>
                       </List>
                     </Collapse>
-                    <Collapse in={toggle && open} timeout="auto" unmountOnExit>
+                    <Collapse in={toggle && sideOpen} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding >
                         <Link href="/virementssortant" sx={{color: '#444', textDecoration: 'none'}}>
                           <ListItemButton sx={{ pl: 4 }}>
@@ -226,21 +223,21 @@ export default function Sidebar({data, isLoading}) {
             <ListItemButton onClick={handleClick}
                     sx={{
                       minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
+                      justifyContent: sideOpen ? 'initial' : 'center',
                       px: 2.5,
                     }}
                   >
                     <PersonIcon
                       sx={{
                         minWidth: 0,
-                        mr: open ? 1 : 'auto',
+                        mr: sideOpen ? 1 : 'auto',
                         justifyContent: 'center',
                       }}
                     />
-                      <ListItemText sx={{ opacity: open ? 1 : 0 }} >Clients</ListItemText>
-                      {open ? <ExpandLess /> : null}
+                      <ListItemText sx={{ opacity: sideOpen ? 1 : 0 }} >Clients</ListItemText>
+                      {sideOpen ? <ExpandLess /> : null}
                 </ListItemButton>
-                    <Collapse in={toggle && open} timeout="auto" unmountOnExit>
+                    <Collapse in={toggle && sideOpen} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding >
                         <Link href="/enregistrementindividuel" sx={{color: '#444', textDecoration: 'none'}}>
                           <ListItemButton sx={{ pl: 4 }}>
@@ -252,7 +249,7 @@ export default function Sidebar({data, isLoading}) {
                         </Link>
                       </List>
                     </Collapse>
-                    <Collapse in={toggle && open} timeout="auto" unmountOnExit>
+                    <Collapse in={toggle && sideOpen} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding >
                         <Link href="/enregistrementgroup" sx={{color: '#444', textDecoration: 'none'}}>
                           <ListItemButton sx={{ pl: 4 }}>
@@ -264,7 +261,7 @@ export default function Sidebar({data, isLoading}) {
                         </Link>
                       </List>
                     </Collapse>
-                    <Collapse in={toggle && open} timeout="auto" unmountOnExit>
+                    <Collapse in={toggle && sideOpen} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding >
                         <Link href="/demandes" sx={{color: '#444', textDecoration: 'none'}}>
                           <ListItemButton sx={{ pl: 4 }}>
@@ -302,7 +299,7 @@ export default function Sidebar({data, isLoading}) {
                         
                         <Route path='/register/' element={<RegisterIBAN />} />
                         <Route path='/bicsearch/' element={<BicSearch />} />*/}
-                        <Route path='/uetrpage/:urlValue' element={<UetrPage  />} />
+                        <Route path='/uetrpage/:uetr' element={<UetrPage  />} />
                         <Route path='/*' element={<Error />} /> 
                         <Route path='/' element={<Dashboard />} />
                         <Route path='/virementsentrant' element={<VirEntrant />} />

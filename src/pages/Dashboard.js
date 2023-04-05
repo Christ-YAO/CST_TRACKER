@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Link } from '@mui/material';
 import Table from 'react-bootstrap/Table';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,18 +10,6 @@ import { data } from '../data/Data.js';
 function App() {
   const [clients, setClients] = useState(data);
   const [search, setSearch] = useState('');
-
-  // const sortName = () => {
-  //   setContacts(
-  //     data.sort((a, b) => {
-  //       return a.first_name.toLowerCase() < a.first_name.toLowerCase()
-  //         ? -1
-  //         : a.first_name.toLowerCase() > a.first_name.toLowerCase()
-  //         ? 1
-  //         : 0;
-  //     })
-  //   );
-  // };
 
   return (
     <Box bgcolor='#f8f8ff' padding='50px 0px' width='100%' height='100%' marginTop='-100px !important' margin="0 auto">

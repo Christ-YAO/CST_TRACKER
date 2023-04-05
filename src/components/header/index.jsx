@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import logo from '../../images/logo.jpeg'
+import Logo from "../commons/Logo";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -43,26 +44,7 @@ function ResponsiveAppBar() {
             }}
           >
             {/* <img src={logo} style={{height: '70px', width: '120px'}}/> */}
-            <Typography
-                    variant="h5"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                    textAlign : 'center',
-                    flexGrow: 1,
-                    fontFamily: 'Delicious Handrawn, monospace',
-                    fontStyle: "italic",
-                    fontSize: 40,
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    letterSpacing: 1,
-                    }}
-                >
-                    iSwift
-                </Typography>
+            <Logo/>
           </Link>
 
           
@@ -83,26 +65,7 @@ function ResponsiveAppBar() {
             }}
           >
             {/* <img src={logo} style={{height: '70px', width: '120px'}}/> */}
-            <Typography
-                    variant="h5"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                    textAlign : 'center',
-                    flexGrow: 1,
-                    fontFamily: 'Delicious Handrawn,monospace',
-                    fontStyle: "italic",
-                    fontSize: 40,
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    letterSpacing: 1,
-                    }}
-                >
-                    iSwift
-                </Typography>
+           <Logo />
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             

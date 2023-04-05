@@ -1,72 +1,76 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Box } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import React, {useState, useEffect} from "react";
+import {Box, Typography} from '@mui/material';
+import {useParams} from 'react-router-dom';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
 import UetrInfo from "../components/UetrInfo";
 import GoBackBtn from "../components/GoBackBtn";
-import Progressbar from "../components/Progressbar";
 import Loader from "../components/Loader";
+import {Caller} from "../components/api/Caller";
+import {Config} from "../components/commons/Config";
+import notfounfImg from "../images/notfoundImg.svg"
+import errorImg from "../images/error_icon.png";
+import {UetrStatus} from "../components/UetrStatus";
+import Progressbar from "../components/Progressbar";
 
-const url = "http://164.90.149.95:5001/api/v1/transactions/b9c917b1-e2ad-4b3f-8a6a-6ddae535517e"
-// const url = "http://localhost:3000/posts"
 
 function UetrPage() {
     const [data, setData] = useState([])
-    const [isLoading, setLoading] = useState(true)
-    // console.log(data)
-  
-      useEffect(() => {
-        if (!url) return
+    const [isLoading, setLoading] = useState(data == null)
+    const [notFound, isNotFound] = useState(false)
+    const {uetr} = useParams()
+    const {TRANSACTION_ENDPOINT, METHOD_GET, NO_HEADER} = Config;
+    const [error, hasError] = useState(false)
+
+    useEffect(() => {
+        console.log("IN USE EFFECT")
+        const caller = new Caller();
         setLoading(true)
-        async function fetchData() {
-          try {
-            const response = await fetch(url)
-            const data = await response.json()
-            setData(data)
-          } catch (err) {
-            setLoading(true)
-          } finally {setLoading(false)
-            // setTimeout(() => {
-            //   setLoading(false)
-            // }, 2000)
-          }
-        }
-        fetchData()
-        }, []);
+        caller.callnow(`${TRANSACTION_ENDPOINT}/${uetr}`,
+            METHOD_GET)
+            .then(response => {
+                setLoading(false);
+                if (response.status === 404)
+                 isNotFound(true)
+                else if(response.ok === false) {
+                    console.log("FAILED", response)
+                    hasError(true)
+                }
+                setData(response)
+                console.log("SUCCEEDED ", response)
+            })
+            .catch(error => {
+                console.log("ERROR ", error);
+                setLoading(false);
+                hasError(true)
+            })
+    }, []);
 
-
-    const { urlValue } = useParams()
-    // console.log("Question Number : ", urlValue)
-
-    const [uetrValue, setUetrValue] = useState([])
-    // const [input, setInput] = useState([])
-    const [inputValue, setInputValue] = useState(urlValue)
-    const [error, setError] = useState(false)
-    const value = (uetrValue[0])
-    // console.log(uetrValue.length)
-
+    const [uetrValue, setUetrValue] = useState(null)
+    const [inputValue, setInputValue] = useState(uetr)
     const handleSubmit = (event) => {
         event.preventDefault()
-        setError(false)
-        setUetrValue([inputValue])
-
-        if (inputValue === '') {
-          setError(!error)
-        }
-      }
+        setUetrValue(inputValue)
+    }
 
 
     return (
-        <Box className='uetrpage' bgcolor="#fff" height='120vh' marginLeft='3%' mb="50px" borderRadius='5px' sx={{ boxShadow: "15px 15px 33px 0px rgba(0,0,0,0.37)",}}>
-                <Container maxWidth="xl" sx={{display: {sm: 'flex',},justifyContent: 'space-between',marginTop: '-80px !important', alignItems: 'center' ,gap: 5, width: '90%',}}>
-                    <GoBackBtn />
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit}
-                        sx={{
+        <Box className='uetrpage' bgcolor="#fff" height='120vh' marginLeft='3%' mb="50px" borderRadius='5px'
+             sx={{boxShadow: "15px 15px 33px 0px rgba(0,0,0,0.37)",}}>
+            <Container maxWidth="xl" sx={{
+                display: {sm: 'flex',},
+                justifyContent: 'space-between',
+                marginTop: '-80px !important',
+                alignItems: 'center',
+                gap: 5,
+                width: '90%',
+            }}>
+                <GoBackBtn/>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{
                         maxWidth: 800,
                         width: '100%',
                         // background: "#eee",
@@ -77,31 +81,49 @@ function UetrPage() {
                         marginBottom: 1,
                         marginTop: 1,
                         paddingTop: 5,
-                        "& > :not(style)": { m: 1, width: "90%" }
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <TextField id="filled-basic" type='search' label="UETR" variant="outlined" error={error} value={inputValue} onChange={(e) => setInputValue(e.target.value)} required sx={{maxWidth: 600}}/>
-                        <Button type="submit" sx={{maxWidth: 150}} variant="contained" onClick={handleSubmit}>Rechercher</Button>
-                    </Box>
-                </Container>
-                {isLoading ? (
-                    <Box sx={{height: "100vh", display: 'grid', placeContent: 'center', marginTop: '-200px'}}>
-                        <Loader />
-                    </Box>
-                ) : 
-                // data.map((items) => {
-                  // console.log(items)
-                 <Box width='90%' margin='0 auto'>
-                        <hr />
-                        <UetrInfo data={data} isLoading={isLoading} value={value}/>
-                        <hr />
-                        <Progressbar data={data} isLoading={isLoading} value={value} uetrValue={uetrValue}/>
-                        
-                    </Box>
-                // })
-              }
+                        "& > :not(style)": {m: 1, width: "90%"}
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField id="filled-basic" type='search' label="UETR" variant="outlined" error={error}
+                               value={inputValue} onChange={(e) => setInputValue(e.target.value)} required
+                               sx={{maxWidth: 600}}/>
+                    <Button type="submit" sx={{maxWidth: 150}} variant="contained"
+                            onClick={handleSubmit}>Rechercher</Button>
+                </Box>
+            </Container>
+            {isLoading ?
+                <Box sx={{
+                    height: "100vh",
+                    display: 'grid',
+                    placeContent: 'center',
+                    marginTop: '-200px'
+                }}>
+                    <Loader/>
+                </Box> :
+                <>
+            {notFound ?
+                <UetrStatus img={notfounfImg} text={"UETR not found"}/> :
+                <>
+                    {error ?
+                        <UetrStatus img={errorImg} text={"An error occured"}/> :
+                        <>
+                                <Box width='90%' margin='0 auto'>
+                                    <hr/>
+                                    <UetrInfo data={data} />
+                                    <hr/>
+                                    <Progressbar
+                                        data={data}
+                                        />
+                                </Box>
+
+                        </>
+                    }
+                </>
+            }
+           </>
+            }
         </Box>
     )
 }

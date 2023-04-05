@@ -4,12 +4,9 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HistoryIcon from '@mui/icons-material/History';
 
-function UetrInfo({data, value, isLoading}) {
+function UetrInfo(data) {
     
-    // console.log(items)
-    if (value === '') {
-        return '';
-    } else if (value === data.uetr) {
+
     return (
         <Box
                 sx={{
@@ -140,7 +137,7 @@ function UetrInfo({data, value, isLoading}) {
                 </Box>
             </Toolbar>
         </Box>
-    )}
+    )
 }
 
 export default UetrInfo;

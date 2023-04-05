@@ -6,13 +6,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HistoryIcon from '@mui/icons-material/History';
 
 function ProgressData({data, intermediary}) {
-    // console.log(senderData)
     const {status, bank_name, bic, country, city} = data.event_data;
-    // let bgColor = status === "Completed" ? "#FFA07A" : "#f8f8ff";
-    // let color = status === "Completed" ? "#fff" : "#667";
 
     let chargeAmount = data.event_data.charge_amount
-    // console.log(chargeAmount)
 
     const func = () => {
         if (data.send_date && data.received_date) {
@@ -59,56 +55,7 @@ function ProgressData({data, intermediary}) {
             </div>
         } 
     }
-    
 
-    // const func = ({date1, date2}) => {
-    //     if (date1 && date2) {
-    //         return (
-    //             <div>
-    //                 <div style={{ display: 'flex', justifyContent: 'space-between',}}>
-    //                     <div>
-    //                         <div>
-    //                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                         </div>
-    //                         <div style={{textTransform: 'uppercase',}}>
-    //                             <Typography variant='h6' sx={{fontSize: 15}}>{date1}</Typography>
-    //                             <Typography>{hour1}</Typography>
-    //                         </div>  
-    //                     </div>
-    //                     <div style={{height: '85px', width: 1, background: 'gray'}}></div>
-    //                     <div>
-    //                         <div>
-    //                             <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                             <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                         </div>
-    //                         <div style={{textTransform: 'uppercase',}}>
-    //                             <Typography variant='h6' sx={{fontSize: 15}}>{date2}</Typography>
-    //                             <Typography>{hour2}</Typography>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //                 <div style={{marginTop: 10, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-    //                 <HistoryIcon sx={{fontSize: 30, color: 'gray', marginRight: 1}} />
-    //                 <Typography>{elapsed_time}</Typography>
-    //             </div>
-    //         </div>
-    //         )
-    //     }
-    //     if (date1 || date2) {
-    //         return (
-    //             <div>
-    //                 <div>
-    //                     <AccessTimeIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                     <ArrowForwardIcon sx={{fontSize: 30, color: 'gray',}} />
-    //                 </div>
-    //                 <div style={{textTransform: 'uppercase',}}>
-    //                     <Typography variant='h6' sx={{fontSize: 15}}>{date1} {date2}</Typography>
-    //                     <Typography>{hour1} {hour2}</Typography>
-    //                 </div>  
-    //             </div>)
-    //         }
-    // }
         return (
             <Box>
                 <Box className='box' bgcolor='#f8f8ff' color="#555" sx={{
